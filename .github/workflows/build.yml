@@ -1,0 +1,47 @@
+name: Build
+on:
+  push:
+    branches:
+    - master
+    tags:
+    - "*"
+  pull_request:
+env:
+  LLVMSHARP_VERSION: 12.0.0-beta1
+  LIBLLVM_VERSION: 12.0.0
+jobs:
+  nuget-push:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@master
+      with:
+        fetch-depth: 0
+    - name: Setup NuGet executable
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: "5.9"
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.9
+      with:
+        versionSpec: "5.6.9"
+    - name: Run GitVersion
+      id: gitversion
+      uses: gittools/actions/gitversion/execute@v0.9.9
+    - name: NuGet Pack
+      run: |
+        version=${{ steps.gitversion.outputs.nuGetVersionV2 }}
+        if [ "${{ github.event_name }}" == "pull_request" ]
+        then
+            version=${version}-${{ steps.gitversion.outputs.shortSha }}
+        fi
+        curl https://raw.githubusercontent.com/microsoft/LLVMSharp/main/LICENSE.txt -o LICENSE.txt
+        nuget install LLVMSharp -Version ${{ env.LLVMSHARP_VERSION }} -x
+        nuget install libLLVM.runtime.ubuntu.18.04-x64 -Version ${{ env.LIBLLVM_VERSION }} -x
+        nuget install libLLVM.runtime.ubuntu.20.04-x64 -Version ${{ env.LIBLLVM_VERSION }} -x
+        nuget install libLLVM.runtime.win-x64 -Version ${{ env.LIBLLVM_VERSION }} -x
+        nuget install libLLVM.runtime.osx-x64 -Version ${{ env.LIBLLVM_VERSION }} -x
+        nuget pack Symbolica.LLVMSharp.nuspec -Properties "version=${version}"
+      shell: bash
+    - name: NuGet Push
+      run: nuget push *.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey ${{ secrets.NUGET_API_KEY }}
