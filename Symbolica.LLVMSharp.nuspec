@@ -8,9 +8,9 @@
     <license type="file">LICENSE.txt</license>
     <icon>Icon.png</icon>
     <projectUrl>https://github.com/SymbolicaDev/Symbolica.LLVMSharp</projectUrl>
-    <description>LLVMSharp packaged from an arbitrary version with interop and libLLVM included.</description>
+    <description>LLVMSharp packaged from an arbitrary version with libLLVM included.</description>
     <copyright>Copyright 2021 Symbolica Dev Limited</copyright>
-    <tags>Symbolica dotnet LLVM libLLVM bindings managed interop native</tags>
+    <tags>Symbolica dotnet LLVM libLLVM bindings managed native</tags>
     <repository type="git" url="https://github.com/microsoft/LLVMSharp" />
     <dependencies>
       <group targetFramework=".NETCoreApp3.1" />
@@ -25,7 +25,6 @@
     <file src="Icon.png" target="" />
     <file src="LICENSE.txt" target="" />
     <file src="LLVMSharp\lib\**" target="lib" />
-    <file src="LLVMSharp.Interop\lib\**" target="lib" />
     <file src="libLLVM.runtime.ubuntu.18.04-x64\runtimes\ubuntu.18.04-x64\**" target="runtimes\debian-x64" />
     <file src="libLLVM.runtime.ubuntu.20.04-x64\runtimes\**" target="runtimes" />
     <file src="libLLVM.runtime.win-x64\runtimes\**" target="runtimes" />
