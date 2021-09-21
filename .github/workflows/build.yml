@@ -7,7 +7,7 @@ on:
     - "*"
   pull_request:
 env:
-  LLVMSHARP_VERSION: 11.0.0-beta1
+  LLVMSHARP_VERSION: 11.0.0-beta
   LIBLLVM_VERSION: 11.0.0
 jobs:
   nuget-push:
