@@ -7,14 +7,15 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="file">LICENSE.txt</license>
     <icon>Icon.png</icon>
-    <projectUrl>https://github.com/SymbolicaDev/Symbolica.LLVMSharp</projectUrl>
+    <projectUrl>https://github.com/Symbolica/Symbolica.LLVMSharp</projectUrl>
     <description>LLVMSharp packaged from an arbitrary version with interop and libLLVM included.</description>
-    <copyright>Copyright 2021 Symbolica Dev Limited</copyright>
+    <copyright>Copyright 2022 Symbolica Dev Limited</copyright>
     <tags>Symbolica dotnet LLVM libLLVM bindings managed interop native</tags>
     <repository type="git" url="https://github.com/microsoft/LLVMSharp" />
     <dependencies>
       <group targetFramework=".NETCoreApp3.1" />
       <group targetFramework="net5.0" />
+      <group targetFramework="net6.0" />
       <group targetFramework=".NETStandard2.0">
         <dependency id="Microsoft.Bcl.HashCode" version="1.1.1" exclude="Build,Analyzers" />
         <dependency id="System.Memory" version="4.5.4" exclude="Build,Analyzers" />
